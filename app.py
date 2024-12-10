@@ -2,8 +2,15 @@ from flask import Flask, request, jsonify, render_template, redirect, url_for, s
 from cryptography.fernet import Fernet
 import mysql.connector
 
-app = Flask(__name__)
+# app = Flask(__name__)
+
+app = Flask(__name__, static_folder='static', template_folder='templates')
 app.secret_key = 'Rajdeep_Bose_Jindabad12'
+
+# Serve static files explicitly
+@app.route('/static/<path:path>')
+def send_static(path):
+    return send_from_directory('static', path)
 
 encryption_key = b'f-d7jAw7RPY5HJvxIet0E3O6jDDbPGb69ca9nVrUVQM='
 cipher = Fernet(encryption_key)
