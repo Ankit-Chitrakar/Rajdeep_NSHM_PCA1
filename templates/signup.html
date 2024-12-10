@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script>
+        async function handleSignup(event) {
+            event.preventDefault();
+            const formData = new FormData(document.getElementById('signupForm'));
+            const response = await fetch('/signup', {
+                method: 'POST',
+                body: formData
+            });
+            const result = await response.json();
+            alert(result.message);
+            if (result.status === "success") {
+                window.location.href = "/login";
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="signup-wrapper">
+        <div class="signup-image">
+            <img src="https://images.mubicdn.net/images/cast_member/931806/cache-886728-1687428072/image-w856.jpg" alt="Signup Image">
+        </div>
+        <div class="signup-form">
+            <h1>Create an Account</h1>
+            <form id="signupForm" onsubmit="handleSignup(event)" class="form">
+                <div class="form-group">
+                    <label for="first_name">First Name</label>
+                    <input type="text" id="first_name" name="first_name" placeholder="Enter your first name" required>
+                </div>
+                <div class="form-group">
+                    <label for="last_name">Last Name</label>
+                    <input type="text" id="last_name" name="last_name" placeholder="Enter your last name" required>
+                </div>
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone_number">Phone Number</label>
+                    <input type="text" id="phone_number" name="phone_number" placeholder="Enter your phone number" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirm_password">Confirm Password</label>
+                    <input type="password" id="confirm_password" name="confirm_password" placeholder="Re-enter your password" required>
+                </div>
+                <button type="submit" class="btn-primary">Register</button>
+            </form>
+            <div class="form-links">
+                <a href="/login">Already have an account? Login here</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

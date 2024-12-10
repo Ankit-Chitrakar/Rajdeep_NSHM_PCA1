@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script>
+        async function handleLogout() {
+            const response = await fetch('/logout');
+            if (response.redirected) {
+                alert("Logout Successful");
+                window.location.href = "/login";
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="form-container-with-image">
+        <div class="form-image">
+            <img src="https://eu-images.contentstack.com/v3/assets/bltcd74acc1d0a99f3a/bltec404d2ff35fdf20/636176eefca4f052284e73e1/R6RHC9.jpg" alt="Home Banner">
+        </div>
+        <div class="form-content">
+            <h1>Welcome, {{ session['username'] }}</h1>
+            <p>
+                This is your home page. You are successfully logged into the system. Enjoy exploring the platform!
+            </p>
+            <button class="btn-primary" onclick="handleLogout()">Logout</button>
+        </div>
+    </div>
+</body>
+</html>
